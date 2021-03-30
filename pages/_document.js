@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
-import { GA_TRACKING_ID } from '../lib/gtag'
+import { GA_TRACKING_ID, OPT_TRACKING_ID } from '../lib/gtag'
 
 export default class MyDocument extends Document {
   render () {
@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
           />
+          <script src={`https://www.googleoptimize.com/optimize.js?id=${OPT_TRACKING_ID}`} />
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -20,7 +21,7 @@ export default class MyDocument extends Document {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
             
-              gtag('config', '${GA_TRACKING_ID}');
+              gtag('config', '${GA_TRACKING_ID}', { 'optimize_id': '${OPT_TRACKING_ID}'});
           `
             }}
           />
